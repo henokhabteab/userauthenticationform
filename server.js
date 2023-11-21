@@ -21,6 +21,24 @@ const db = mysql.createConnection({
   port: DBPort,
 });
 
+const createTableQuery = `
+    CREATE TABLE users (
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      password VARCHAR(255) NOT NULL
+    )
+  `;
+
+// Execute the query to create the table
+db.query(createTableQuery, (queryErr, result) => {
+  if (queryErr) {
+    process.exit(1);
+  } else {
+    console.log("Table created successfully:", result);
+  }
+});
+
 app.post("/Signup", (req, res) => {
   const sql = "INSERT INTO login (`name`, `email`,`password`) VALUES (?)";
   const values = [req.body.name, req.body.email, req.body.password];

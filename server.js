@@ -26,7 +26,9 @@ app.post("/Signup", (req, res) => {
   const values = [req.body.name, req.body.email, req.body.password];
   db.query(sql, [values], (err, data) => {
     if (err) {
-      return res.json("Error");
+      return res
+        .status(400)
+        .json({ message: "failed to create account", error: err });
     }
     return res.json(data);
   });

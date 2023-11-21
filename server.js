@@ -40,7 +40,7 @@ db.query(createTableQuery, (queryErr, result) => {
 });
 
 app.post("/Signup", (req, res) => {
-  const sql = "INSERT INTO login (`name`, `email`,`password`) VALUES (?)";
+  const sql = "INSERT INTO users (`name`, `email`,`password`) VALUES (?)";
   const values = [req.body.name, req.body.email, req.body.password];
   db.query(sql, [values], (err, data) => {
     if (err) {

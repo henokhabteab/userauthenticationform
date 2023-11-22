@@ -31,13 +31,13 @@ const createTableQuery = `
   `;
 
 // Execute the query to create the table
-db.query(createTableQuery, (queryErr, result) => {
-  if (queryErr) {
-    process.exit(1);
-  } else {
-    console.log("Table created successfully:", result);
-  }
-});
+// db.query(createTableQuery, (queryErr, result) => {
+//   if (queryErr) {
+//     process.exit(1);
+//   } else {
+//     console.log("Table created successfully:", result);
+//   }
+// });
 
 app.post("/Signup", (req, res) => {
   const sql = "INSERT INTO users (`name`, `email`,`password`) VALUES (?)";

@@ -22,7 +22,7 @@ const db = mysql.createConnection({
 });
 
 const createTableQuery = `
-    CREATE TABLE users (
+    CREATE TABLE if not exists users (
       id INT PRIMARY KEY AUTO_INCREMENT,
       name VARCHAR(255) NOT NULL,
       email VARCHAR(255) NOT NULL,
@@ -31,16 +31,16 @@ const createTableQuery = `
   `;
 
 // Execute the query to create the table
-// db.query(createTableQuery, (queryErr, result) => {
-//   if (queryErr) {
-//     process.exit(1);
-//   } else {
-//     console.log("Table created successfully:", result);
-//   }
-// });
+db.query(createTableQuery, (queryErr, result) => {
+  if (queryErr) {
+    process.exit(1);
+  } else {
+    console.log("Table created successfully:", result);
+  }
+});
 
 app.post("/Signup", (req, res) => {
-  const sql = "INSERT INTO members (`name`, `email`,`password`) VALUES (?)";
+  const sql = "INSERT INTO users (`name`, `email`,`password`) VALUES (?)";
   const values = [req.body.name, req.body.email, req.body.password];
   db.query(sql, [values], (err, data) => {
     if (err) {
